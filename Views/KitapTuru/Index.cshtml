@@ -19,7 +19,7 @@
                 <td>@kitapTuru.Id</td>
                 <td>@kitapTuru.Ad</td>
                 <td>
-                        <a asp-controller="KitapTuru" asp-action="Guncelle" class="btn btn-success">Güncelle</a>
+                        <a asp-controller="KitapTuru" asp-action="Guncelle" asp-route-id="@kitapTuru.Id" class="btn btn-success">Güncelle</a>
                  </td>
                  <td>
                         <a asp-controller="KitapTuru" asp-action="Sil" class="btn btn-danger">Sil</a>
