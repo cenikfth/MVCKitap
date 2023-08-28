@@ -21,12 +21,14 @@ namespace WebUygulamaProje1.Controllers
         {
             return View(); 
         }
+
         [HttpPost]
         public IActionResult Ekle(KitapTuru kitapTuru)
         {
             if(ModelState.IsValid) { 
             _uygulamaDbContext.KitapTurleri.Add(kitapTuru);
             _uygulamaDbContext.SaveChanges();
+                TempData["basarili"] = "Yeni Kitap Türü başarıyla oluşturuldu";
             return RedirectToAction("Index");
             }
             return View();
@@ -45,6 +47,7 @@ namespace WebUygulamaProje1.Controllers
             }
             return View(kitapTuruVt);
         }
+
         [HttpPost]
         public IActionResult Guncelle(KitapTuru kitapTuru)
         {
@@ -52,6 +55,7 @@ namespace WebUygulamaProje1.Controllers
             {
                 _uygulamaDbContext.KitapTurleri.Update(kitapTuru);
                 _uygulamaDbContext.SaveChanges();
+                TempData["basarili"] = "Yeni Kitap Türü başarıyla güncellendi";
                 return RedirectToAction("Index");
             }
             return View();
@@ -69,6 +73,7 @@ namespace WebUygulamaProje1.Controllers
             }
             return View(kitapTuruVt);
         }
+
         [HttpPost, ActionName("Sil")]
         public IActionResult SilPost(int? id)
         {
@@ -83,6 +88,7 @@ namespace WebUygulamaProje1.Controllers
             }
             _uygulamaDbContext.KitapTurleri.Remove(kitapTuru);
             _uygulamaDbContext.SaveChanges();
+            TempData["basarili"] = "Kayıt Silme işlemi başarılı!";
             return RedirectToAction("Index","KitapTuru");
         }
     }
