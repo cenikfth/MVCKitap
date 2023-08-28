@@ -22,7 +22,7 @@
                         <a asp-controller="KitapTuru" asp-action="Guncelle" asp-route-id="@kitapTuru.Id" class="btn btn-success">Güncelle</a>
                  </td>
                  <td>
-                        <a asp-controller="KitapTuru" asp-action="Sil" class="btn btn-danger">Sil</a>
+                        <a asp-controller="KitapTuru" asp-action="Sil" asp-route-id="@kitapTuru.Id" class="btn btn-danger">Sil</a>
                  </td>
             </tr> 
         }
