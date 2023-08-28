@@ -8,8 +8,9 @@ namespace WebUygulamaProje1.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Kitap Tür Adı boş bırakılamaz!")]
         [DisplayName("Kitap Türü Adı")]
+        [MaxLength(25)]
         public  string Ad { get; set; }
 
     }
