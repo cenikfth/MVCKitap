@@ -27,6 +27,10 @@ namespace WebUygulamaProje1.Controllers
             _uygulamaDbContext.KitapTurleri.Add(kitapTuru);
             _uygulamaDbContext.SaveChanges();
             return RedirectToAction("Index");
+            //if (ModelState.IsValid) { 
+      
+            //}
+            //return View();
         }
     }
 }
