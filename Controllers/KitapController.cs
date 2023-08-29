@@ -89,7 +89,7 @@ namespace WebUygulamaProje1.Controllers
             _kitapRepository.Sil(kitap);
             _kitapRepository.Kaydet();
             TempData["basarili"] = "Kayıt Silme işlemi başarılı!";
-            return RedirectToAction("Index","KitapTuru");
+            return RedirectToAction("Index","Kitap");
         }
     }
 }
