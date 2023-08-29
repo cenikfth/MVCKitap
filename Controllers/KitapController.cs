@@ -21,7 +21,7 @@ namespace WebUygulamaProje1.Controllers
             return View(objKitapList);
         }
 
-        public IActionResult Ekle() 
+        public IActionResult EkleGuncelle(int? id) 
         {
             IEnumerable<SelectListItem> KitapTuruList = _kitapTuruRepository.GetAll()
                .Select(f => new SelectListItem
@@ -30,11 +30,25 @@ namespace WebUygulamaProje1.Controllers
                    Value = f.Id.ToString(),
                });
             ViewBag.KitapTuruList = KitapTuruList;
-            return View(); 
+            if (id == null || id == 0)
+            {
+                return View();
+            }
+            else
+            {
+                Kitap? kitapVt = _kitapRepository.Get(u => u.Id == id);
+                if (kitapVt == null)
+                {
+                    return NotFound();
+                }
+                return View(kitapVt);
+            }
+
         }
 
         [HttpPost]
-        public IActionResult Ekle(Kitap kitap)
+        public IActionResult EkleGuncelle(Kitap kitap,IFormFile? fi
+            )
         {
             if(ModelState.IsValid) {
                 _kitapRepository.Ekle(kitap);
@@ -45,45 +59,45 @@ namespace WebUygulamaProje1.Controllers
             return View();
         }
 
-        public IActionResult Guncelle(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            Kitap? kitapVt = _kitapRepository.Get(u => u.Id == id);
-            if (kitapVt == null) 
-            { 
-                return NotFound(); 
-            }
-            return View(kitapVt);
-        }
+        //public IActionResult Guncelle(int? id)
+        //{
+        //    if (id == null || id == 0)
+        //    {
+        //        return NotFound();
+        //    }
+        //    Kitap? kitapVt = _kitapRepository.Get(u => u.Id == id);
+        //    if (kitapVt == null) 
+        //    { 
+        //        return NotFound(); 
+        //    }
+        //    return View(kitapVt);
+        //}
 
-        [HttpPost]
-        public IActionResult Guncelle(Kitap kitap)
-        {
-            if (ModelState.IsValid)
-            {
-                _kitapRepository.Güncelle(kitap);
-                _kitapRepository.Kaydet();
-                TempData["basarili"] = "Yeni Kitap başarıyla güncellendi";
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
-        public IActionResult Sil(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            Kitap? kitapVt = _kitapRepository.Get(u => u.Id == id);
-            if (kitapVt == null)
-            {
-                return NotFound();
-            }
-            return View(kitapVt);
-        }
+        //[HttpPost]
+        //public IActionResult Guncelle(Kitap kitap)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _kitapRepository.Güncelle(kitap);
+        //        _kitapRepository.Kaydet();
+        //        TempData["basarili"] = "Yeni Kitap başarıyla güncellendi";
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View();
+        //}
+        //public IActionResult Sil(int? id)
+        //{
+        //    if (id == null || id == 0)
+        //    {
+        //        return NotFound();
+        //    }
+        //    Kitap? kitapVt = _kitapRepository.Get(u => u.Id == id);
+        //    if (kitapVt == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(kitapVt);
+        //}
 
         [HttpPost, ActionName("Sil")]
         public IActionResult SilPost(int? id)

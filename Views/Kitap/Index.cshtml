@@ -37,7 +37,7 @@
                 <td>@kitap.Fiyat</td>
                     <td></td>
                 <td>
-                        <a asp-controller="Kitap" asp-action="Guncelle" asp-route-id="@kitap.Id" class="btn btn-success">Güncelle</a>
+                        <a asp-controller="Kitap" asp-action="EkleGuncelle" asp-route-id="@kitap.Id" class="btn btn-success">Güncelle</a>
                  </td>
                  <td>
                         <a asp-controller="Kitap" asp-action="Sil" asp-route-id="@kitap.Id" class="btn btn-danger">Sil</a>
@@ -49,7 +49,7 @@
 </table>
 <div class="row pt-3 pb-2">
     <div>
-        <a asp-controller="Kitap" asp-action="Ekle" class="btn btn-lg btn-primary" type="button"> Yeni Kitap Oluştur</a>
+        <a asp-controller="Kitap" asp-action="EkleGuncelle" class="btn btn-lg btn-primary" type="button"> Yeni Kitap Oluştur</a>
     </div>
 </div>
 </div>
