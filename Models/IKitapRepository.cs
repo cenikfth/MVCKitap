@@ -2,7 +2,7 @@
 {
     public interface IKitapRepository: IRepository<Kitap>
     {
-        void Güncelle (Kitap kitap);
+        void Guncelle (Kitap kitap);
         void Kaydet();
     }
 }

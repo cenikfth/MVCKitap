@@ -9,10 +9,12 @@ namespace WebUygulamaProje1.Controllers
     {
         private readonly IKitapRepository _kitapRepository;
         private readonly IKitapTuruRepository _kitapTuruRepository;
-        public KitapController(IKitapRepository kitapRepository, IKitapTuruRepository kitapTuruRepository)
+        public readonly IWebHostEnvironment _webHostEnvironment;
+        public KitapController(IKitapRepository kitapRepository, IKitapTuruRepository kitapTuruRepository, IWebHostEnvironment webHostEnvironment)
         {
             _kitapRepository = kitapRepository;
             _kitapTuruRepository = kitapTuruRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -47,13 +49,33 @@ namespace WebUygulamaProje1.Controllers
         }
 
         [HttpPost]
-        public IActionResult EkleGuncelle(Kitap kitap,IFormFile? fi
-            )
+        public IActionResult EkleGuncelle(Kitap kitap,IFormFile file)
         {
             if(ModelState.IsValid) {
-                _kitapRepository.Ekle(kitap);
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                string kitapPath = Path.Combine(wwwRootPath, @"img");
+                
+                using(var fileStream = new FileStream(Path.Combine(kitapPath, file.FileName),FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+                kitap.ResimUrl = @"\img\" + file.FileName ;
+
+                if (kitap.Id == 0)
+                {
+                    _kitapRepository.Ekle(kitap);
+                    TempData["basarili"] = "Yeni Kitap  başarıyla oluşturuldu";
+                }
+                else
+                {
+                    _kitapRepository.Guncelle(kitap);
+                    TempData["basarili"] = "Kitap  başarıyla Güncellendi";
+                }
+
+
+               
                 _kitapRepository.Kaydet();
-                TempData["basarili"] = "Yeni Kitap  başarıyla oluşturuldu";
+                
             return RedirectToAction("Index");
             }
             return View();

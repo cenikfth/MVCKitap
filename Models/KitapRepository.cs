@@ -11,7 +11,7 @@ namespace WebUygulamaProje1.Models
             _uygulamaDbContext = uygulamaDbContext;
         }
 
-        public void Güncelle(Kitap kitap)
+        public void Guncelle(Kitap kitap)
         {
             _uygulamaDbContext.Update(kitap);
         }
