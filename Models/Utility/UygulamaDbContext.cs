@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebUygulamaProje1.Models.Utility
 {
-    public class UygulamaDbContext: DbContext
+    public class UygulamaDbContext: IdentityDbContext
     {
         public UygulamaDbContext(DbContextOptions<UygulamaDbContext> options):base(options) { }
         public DbSet<KitapTuru> KitapTurleri { get; set; }
