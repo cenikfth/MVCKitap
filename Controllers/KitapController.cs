@@ -107,19 +107,19 @@ namespace WebUygulamaProje1.Controllers
         //    }
         //    return View();
         //}
-        //public IActionResult Sil(int? id)
-        //{
-        //    if (id == null || id == 0)
-        //    {
-        //        return NotFound();
-        //    }
-        //    Kitap? kitapVt = _kitapRepository.Get(u => u.Id == id);
-        //    if (kitapVt == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(kitapVt);
-        //}
+        public IActionResult Sil(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Kitap? kitapVt = _kitapRepository.Get(u => u.Id == id);
+            if (kitapVt == null)
+            {
+                return NotFound();
+            }
+            return View(kitapVt);
+        }
 
         [HttpPost, ActionName("Sil")]
         public IActionResult SilPost(int? id)

@@ -77,9 +77,18 @@ namespace WebUygulamaProje1.Controllers
 
        public IActionResult Sil(int id)
         {
+            IEnumerable<SelectListItem> KitapList = _kitapRepository.GetAll()
+               .Select(f => new SelectListItem
+               {
+                   Text = f.KitapAdi,
+                   Value = f.Id.ToString(),
+               });
+            ViewBag.KitapList = KitapList;
             if (id == null || id== 0)
             { return NotFound(); }
-            return View();
+            Kiralama? kiralamaVt = _kiralamaRepository.Get(f => f.Id == id);
+            if(kiralamaVt == null) {  return NotFound(); }
+            return View(kiralamaVt);
         }
 
         [HttpPost, ActionName("Sil")]
