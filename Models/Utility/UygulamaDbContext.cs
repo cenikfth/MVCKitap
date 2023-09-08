@@ -10,5 +10,7 @@ namespace WebUygulamaProje1.Models.Utility
         public DbSet<Kitap> Kitaplar {get; set; }
         public DbSet<Kiralama> Kiralamalar {get; set; }
 
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
     }
 }
