@@ -6,7 +6,7 @@ using WebUygulamaProje1.Models.Utility;
 
 namespace WebUygulamaProje1.Controllers
 {
-    [Authorize(Roles = UserRoles.Role_Admin)]
+   
     public class KitapController : Controller
     {
         private readonly IKitapRepository _kitapRepository;
@@ -18,6 +18,7 @@ namespace WebUygulamaProje1.Controllers
             _kitapTuruRepository = kitapTuruRepository;
             _webHostEnvironment = webHostEnvironment;
         }
+        [Authorize(Roles = "Admin,Ogrenci")]
         public IActionResult Index()
         {
             List<Kitap> objKitapList = _kitapRepository.GetAll(includeProps:"KitapTuru").ToList();
@@ -25,6 +26,7 @@ namespace WebUygulamaProje1.Controllers
             return View(objKitapList);
         }
 
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public IActionResult EkleGuncelle(int? id) 
         {
             IEnumerable<SelectListItem> KitapTuruList = _kitapTuruRepository.GetAll()
@@ -50,6 +52,7 @@ namespace WebUygulamaProje1.Controllers
 
         }
 
+        [Authorize(Roles = UserRoles.Role_Admin)]
         [HttpPost]
         public IActionResult EkleGuncelle(Kitap kitap,IFormFile file)
         {
@@ -109,6 +112,7 @@ namespace WebUygulamaProje1.Controllers
         //    }
         //    return View();
         //}
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public IActionResult Sil(int? id)
         {
             if (id == null || id == 0)
@@ -122,6 +126,7 @@ namespace WebUygulamaProje1.Controllers
             }
             return View(kitapVt);
         }
+        [Authorize(Roles = UserRoles.Role_Admin)]
 
         [HttpPost, ActionName("Sil")]
         public IActionResult SilPost(int? id)
